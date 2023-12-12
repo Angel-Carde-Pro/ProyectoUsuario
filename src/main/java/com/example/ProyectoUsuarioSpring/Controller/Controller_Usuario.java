@@ -13,37 +13,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ProyectoUsuarioSpring.Entity.Usuario;
-import com.example.ProyectoUsuarioSpring.Service.UsuarioService;
-
+import com.example.ProyectoUsuarioSpring.modelo.entity.Usuario;
+import com.example.ProyectoUsuarioSpring.modelo.service.Usuario_Service;
 
 @RestController
 @RequestMapping(path = "api/v1/usuarios")
-public class UsuarioController {
+public class Controller_Usuario {
 	@Autowired
-	private  UsuarioService  service;
-	
-	
+	private Usuario_Service service;
+
 	@GetMapping
-	public Iterable<Usuario> getAll(){
+	public Iterable<Usuario> getAll() {
 		return service.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
-	public Optional<Usuario> getByID(@PathVariable Long id){
+	public Optional<Usuario> getByID(@PathVariable Long id) {
 		return service.getUser(id);
 	}
-	
+
 	@PostMapping("/save")
-	public void saveUpdate(@RequestBody Usuario usuario){
-		System.out.print("Hola"+usuario);
+	public void saveUpdate(@RequestBody Usuario usuario) {
+		System.out.print("Hola" + usuario);
 		service.saveOrUpdate(usuario);
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable("id") Long id){
+	public void delete(@PathVariable("id") Long id) {
 		service.delete(id);
 	}
-	
-	
 }
